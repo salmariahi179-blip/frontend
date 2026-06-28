@@ -1,19 +1,22 @@
-import Sidebar from "@/components/layout/Sidebar";
-import Navbar from "@/components/layout/Navbar";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="flex min-h-screen bg-gray-50">
-      <Sidebar />
+  const router = useRouter();
 
-      <div className="flex-1 flex flex-col">
-        <Navbar />
-        <main className="p-6">{children}</main>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      router.push("/login");
+    }
+  }, []);
+
+  return <div>{children}</div>;
 }

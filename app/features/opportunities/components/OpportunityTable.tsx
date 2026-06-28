@@ -1,28 +1,47 @@
-export default function OpportunityTable({ data }: unknown) {
+"use client";
+
+import { Opportunity } from "../type";
+
+type Props = {
+  data: Opportunity[];
+  onEdit: (op: Opportunity) => void;
+  onDelete: (id: string) => void;
+};
+
+export default function OpportunityTable({ data, onEdit, onDelete }: Props) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead className="bg-gray-100 text-left">
-          <tr>
-            <th className="p-3">ID</th>
-            <th className="p-3">Title</th>
-            <th className="p-3">Client</th>
-            <th className="p-3">Amount</th>
-            <th className="p-3">Status</th>
+    <div className="bg-white rounded-lg shadow">
+      <table className="w-full">
+        <thead>
+          <tr className="border-b">
+            <th className="p-3 text-left">Title</th>
+            <th className="p-3 text-left">Amount</th>
+            <th className="p-3 text-left">Status</th>
+            <th className="p-3 text-left">Actions</th>
           </tr>
         </thead>
 
         <tbody>
-          {data.map((op: any) => (
-            <tr key={op.id} className="border-t hover:bg-gray-50">
-              <td className="p-3">{op.id}</td>
-              <td className="p-3 font-medium">{op.title}</td>
-              <td className="p-3">{op.client}</td>
-              <td className="p-3">{op.amount} $</td>
-              <td className="p-3">
-                <span className="px-2 py-1 rounded bg-blue-100 text-blue-700">
-                  {op.status}
-                </span>
+          {data.map((op) => (
+            <tr key={op.id} className="border-b">
+              <td className="p-3">{op.title}</td>
+              <td className="p-3">{op.amount} €</td>
+              <td className="p-3">{op.status}</td>
+
+              <td className="p-3 flex gap-2">
+                <button
+                  className="text-blue-500"
+                  onClick={() => onEdit(op)}
+                >
+                  Edit
+                </button>
+
+                <button
+                  className="text-red-500"
+                  onClick={() => onDelete(op.id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
