@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Opportunity } from "@/types/opportunity";
-import { getOpportunities } from "@/features/opportunity.service";
+import { getOpportunities } from "@/types/opportunity.service";
 
 export const useOpportunities = () => {
   const [data, setData] = useState<Opportunity[]>([]);

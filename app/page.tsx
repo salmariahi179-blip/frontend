@@ -1,4 +1,4 @@
-import OpportunityTable from "./features/opportunities/OpportunityTable";
+import OpportunityTable from "./features/opportunities/components/OpportunityTable";
 
 export default function Home() {
   return (
